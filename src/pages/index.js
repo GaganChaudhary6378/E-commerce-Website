@@ -17,6 +17,7 @@ export default function Home() {
       <main>
         <h2 className="bg-slate-400 text-orange-900">Hey this is Gagan</h2>
       </main>
+      
     </>
   )
 }
