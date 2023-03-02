@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineShoppingCart } from 'react-icons/Ai';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 export default function Navbar(){
     return (
