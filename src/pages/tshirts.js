@@ -11,7 +11,7 @@ export default function tshirts() {
                 <a className="block relative  rounded overflow-hidden">
                   <img
                     alt="ecommerce"
-                    className="flex content-center items-center ml-6 h-[33vh] w-[36vh] md:h-[36vh] md:block"
+                    className="flex content-center items-center h-[33vh] w-[36vh] md:h-[36vh] md:block"
                     src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
                   />
                 </a>
@@ -32,7 +32,7 @@ export default function tshirts() {
                 <a className="block relative  rounded overflow-hidden">
                   <img
                     alt="ecommerce"
-                    className="flex content-center items-center ml-6 h-[33vh] w-[36vh] md:h-[36vh] md:block"
+                    className="flex content-center items-center h-[33vh] w-[36vh] md:h-[36vh] md:block"
                     src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
                   />
                 </a>
@@ -53,7 +53,7 @@ export default function tshirts() {
                 <a className="block relative  rounded overflow-hidden">
                   <img
                     alt="ecommerce"
-                    className="flex content-center items-center ml-6 h-[33vh] w-[36vh] md:h-[36vh] md:block"
+                    className="flex content-center items-center h-[33vh] w-[36vh] md:h-[36vh] md:block"
                     src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
                   />
                 </a>
@@ -74,7 +74,7 @@ export default function tshirts() {
                 <a className="block relative  rounded overflow-hidden">
                   <img
                     alt="ecommerce"
-                    className="flex content-center items-center ml-6 h-[33vh] w-[36vh] md:h-[36vh] md:block"
+                    className="flex content-center items-center h-[33vh] w-[36vh] md:h-[36vh] md:block"
                     src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
                   />
                 </a>
@@ -95,7 +95,7 @@ export default function tshirts() {
                 <a className="block relative  rounded overflow-hidden">
                   <img
                     alt="ecommerce"
-                    className="flex content-center items-center ml-6 h-[33vh] w-[36vh] md:h-[36vh] md:block"
+                    className="flex content-center items-center h-[33vh] w-[36vh] md:h-[36vh] md:block"
                     src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
                   />
                 </a>
@@ -116,7 +116,7 @@ export default function tshirts() {
                 <a className="block relative  rounded overflow-hidden">
                   <img
                     alt="ecommerce"
-                    className="flex content-center items-center ml-6 h-[33vh] w-[36vh] md:h-[36vh] md:block"
+                    className="flex content-center items-center h-[33vh] w-[36vh] md:h-[36vh] md:block"
                     src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
                   />
                 </a>
@@ -137,7 +137,7 @@ export default function tshirts() {
                 <a className="block relative  rounded overflow-hidden">
                   <img
                     alt="ecommerce"
-                    className="flex content-center items-center ml-6 h-[33vh] w-[36vh] md:h-[36vh] md:block"
+                    className="flex content-center items-center h-[33vh] w-[36vh] md:h-[36vh] md:block"
                     src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
                   />
                 </a>
@@ -158,7 +158,7 @@ export default function tshirts() {
                 <a className="block relative  rounded overflow-hidden">
                   <img
                     alt="ecommerce"
-                    className="flex content-center items-center ml-6 h-[33vh] w-[36vh] md:h-[36vh] md:block"
+                    className="flex content-center items-center h-[33vh] w-[36vh] md:h-[36vh] md:block"
                     src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
                   />
                 </a>
