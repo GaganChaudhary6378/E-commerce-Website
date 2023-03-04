@@ -11,12 +11,12 @@ import { BsFillBagCheckFill } from 'react-icons/bs';
 
 export default function Navbar(){
     function toggleCart(){
-        if(ref.current.classList.contains('translate-x-full')){
-            ref.current.classList.remove('translate-x-full')
-            ref.current.classList.add('translate-x-0')
-        }else if(!ref.current.classList.contains('translate-x-full')){
-            ref.current.classList.remove('translate-x-0')
-            ref.current.classList.add('translate-x-full')
+        if(ref.current.classList.contains('block')){
+            ref.current.classList.remove('block')
+            ref.current.classList.add('hidden')
+        }else if(!ref.current.classList.contains('block')){
+            ref.current.classList.remove('hidden')
+            ref.current.classList.add('block')
         }
     }
     const ref=useRef();
@@ -36,7 +36,7 @@ export default function Navbar(){
             <div onClick={toggleCart} className="cart absolute right-0 top-2 mx-5 md:mt-2 font-bold hover:cursor-pointer ">
                 <AiOutlineShoppingCart className="text-xl md:text-2xl"/>
             </div>
-            <div ref={ref} className="w-80 h-full sideCart absolute top-0 right-0 bg-pink-200 px-6 py-10 transform transition-transform translate-x-full z-10">
+            <div ref={ref} className="w-80 h-full sideCart absolute top-0 right-0 bg-pink-200 px-6 py-10 block z-10">
                 <h2 className="font-bold text-xl text-center">Shopping Cart</h2>
                 <span onClick={toggleCart} className="absolute top-5 right-2 text-pink-500" ><AiFillCloseCircle className="text-xl hover:cursor-pointer"/></span>
                 <ul className="list-decimal font-semibold">
