@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Ref } from "react";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { AiFillPlusCircle } from 'react-icons/ai';
