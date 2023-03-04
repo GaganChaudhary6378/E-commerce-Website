@@ -34,13 +34,13 @@ export default function Navbar(){
                     <Link href={'/mugs'}><li>Mugs</li></Link>
                 </ul>
             </div>
-            <div onClick={toggleCart} className="cart absolute right-0 top-2 mx-5 md:mt-2 font-bold hover:cursor-pointer">
+            <div onClick={toggleCart} className="cart absolute right-0 top-2 mx-5 md:mt-2 font-bold hover:cursor-pointer ">
                 <AiOutlineShoppingCart className="text-xl md:text-2xl"/>
             </div>
-            <div ref={ref} className="w-80 h-full sideCart absolute top-0 right-0 bg-pink-200 px-6 py-10 transform transition-transform translate-x-full">
+            <div ref={ref} className="w-80 h-full sideCart absolute top-0 right-0 bg-pink-200 px-6 py-10 transform transition-transform translate-x-full z-10">
                 <h2 className="font-bold text-xl text-center">Shopping Cart</h2>
                 <span onClick={toggleCart} className="absolute top-5 right-2 text-pink-500" ><AiFillCloseCircle className="text-xl hover:cursor-pointer"/></span>
-                <ul className="list-decimal py-4 font-semibold">
+                <ul className="list-decimal font-semibold">
                     <li>
                         <div className="pl-4 item flex my-5">
                             <div className="w-2/3 font-semibold">T-shirts-Shop in loop</div>
