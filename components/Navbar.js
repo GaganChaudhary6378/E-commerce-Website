@@ -7,7 +7,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
 
-export default function Navbar() {
+export default function Navbar({cart,addToCart,removeFromCart,clearCart,subTotal}) {
   function toggleCart() {
     if (ref.current.classList.contains("block")) {
       ref.current.classList.remove("block");
@@ -115,7 +115,7 @@ export default function Navbar() {
             <BsFillBagCheckFill className="m-1" />
             Checkout
           </button>
-          <button className="flex mx-auto mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-600 rounded text-lg">
+          <button onClick={clearCart} className="flex mx-auto mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-600 rounded text-lg">
             Clear Cart
           </button>
         </div>
