@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function slug() {
+export default function slug({addToCart}) {
   const [pin, setPin] = React.useState();
   const [service, setService] = React.useState();
 
@@ -180,7 +180,7 @@ export default function slug() {
                 <button className="flex ml-4 md:ml-8 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded">
                   Buy Now
                 </button>
-                <button className="flex ml-2 md:ml-4 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded">
+                <button onClick={() => {addToCart(slug,1,499,'Shop in loop(XL,Red)','XL','Red')}} className="flex ml-2 md:ml-4 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded">
                   Add to Cart
                 </button>
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">

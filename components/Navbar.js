@@ -59,56 +59,23 @@ export default function Navbar({cart,addToCart,removeFromCart,clearCart,subTotal
           <AiFillCloseCircle className="text-xl hover:cursor-pointer" />
         </span>
         <ul className="list-decimal font-semibold">
-          <li>
+          {Object.keys(cart).length==0 && 
+          <div className="mt-10">No items in the cart. 
+            Please go ahead and add a few items in your cart to checkout.
+          </div>}
+          {Object.keys(cart).map((k) => {
+            return (
+            <li key={k}>
             <div className="pl-4 item flex my-5">
-              <div className="w-2/3 font-semibold">T-shirts-Shop in loop</div>
+              <div className="w-2/3 font-semibold">{cart[k].name}</div>
               <div className="flex font-semibold items-center justify-center w-1/3">
-                <AiFillMinusCircle className="cursor-pointer text-pink-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-pink-500" />
+                <AiFillMinusCircle onClick={() => {removeFromCart(k,1,cart[k].price,cart[k].name,cart[k].size,cart[k].variant)}} className="cursor-pointer text-pink-500" />
+                <span className="mx-2 text-sm">{cart[k].qty}</span>
+                <AiFillPlusCircle onClick={() =>addToCart(k,1,cart[k].price,cart[k].name,cart[k].size,cart[k].variant)} className="cursor-pointer text-pink-500" />
               </div>
             </div>
           </li>
-          <li>
-            <div className="pl-4 item flex my-5">
-              <div className="w-2/3 font-semibold">T-shirts-Shop in loop</div>
-              <div className="flex font-semibold items-center justify-center w-1/3">
-                <AiFillMinusCircle className="cursor-pointer text-pink-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-pink-500" />
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className="pl-4 item flex my-5">
-              <div className="w-2/3 font-semibold">T-shirts-Shop in loop</div>
-              <div className="flex font-semibold items-center justify-center w-1/3">
-                <AiFillMinusCircle className="cursor-pointer text-pink-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-pink-500" />
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className="pl-4 item flex my-5">
-              <div className="w-2/3 font-semibold">T-shirts-Shop in loop</div>
-              <div className="flex font-semibold items-center justify-center w-1/3">
-                <AiFillMinusCircle className="cursor-pointer text-pink-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-pink-500" />
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className="pl-4 item flex my-5">
-              <div className="w-2/3 font-semibold">T-shirts-Shop in loop</div>
-              <div className="flex font-semibold items-center justify-center w-1/3">
-                <AiFillMinusCircle className="cursor-pointer text-pink-500" />
-                <span className="mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-pink-500" />
-              </div>
-            </div>
-          </li>
+          )})}
         </ul>
         <div className="flex flex-row justify-between">
           <button className="flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-600 rounded text-lg">
