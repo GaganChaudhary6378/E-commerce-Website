@@ -6,6 +6,8 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
+import { MdAccountCircle } from "react-icons/md";
+
 
 export default function Navbar({
   cart,
@@ -48,10 +50,11 @@ export default function Navbar({
         </ul>
       </div>
       <div
-        onClick={toggleCart}
-        className="cart absolute right-0 top-2 mx-5 md:mt-2 font-bold hover:cursor-pointer "
+        
+        className="cart absolute right-0 top-2 mx-5 md:mt-2 font-bold hover:cursor-pointer flex "
       >
-        <AiOutlineShoppingCart className="text-xl md:text-2xl" />
+        <Link href={'/login'}><MdAccountCircle className="text-xl md:text-2xl mx-2" /></Link>
+        <AiOutlineShoppingCart onClick={toggleCart} className="text-xl md:text-2xl" />
       </div>
       <div
         ref={ref}

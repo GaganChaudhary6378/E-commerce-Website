@@ -1,10 +1,9 @@
 import React from "react";
 import Link from "next/link";
-
-export default function signup(){
-    return (
-        <div>
-            <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+export default function forgot() {
+  return (
+    <div>
+      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
@@ -13,12 +12,12 @@ export default function signup(){
               alt="Your Company"
             />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Sign up for your account
+              Forgot Password
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or
               <Link
-                href={'/login'}
+                href={"/login"}
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 &nbsp;Login
@@ -28,20 +27,6 @@ export default function signup(){
           <form className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" value="true" />
             <div className="-space-y-px rounded-md shadow-sm">
-              <div>
-                <label for="email-address" className="sr-only">
-                  Your Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autocomplete="name"
-                  required
-                  className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Enter your name"
-                />
-              </div>
               <div>
                 <label for="email-address" className="sr-only">
                   Email address
@@ -56,23 +41,8 @@ export default function signup(){
                   placeholder="Email address"
                 />
               </div>
-              <div>
-                <label for="password" className="sr-only">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autocomplete="current-password"
-                  required
-                  className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Password"
-                />
-              </div>
+              
             </div>
-
-          
 
             <div>
               <button
@@ -93,12 +63,12 @@ export default function signup(){
                     />
                   </svg>
                 </span>
-                Sign Up
+                Continue
               </button>
             </div>
           </form>
         </div>
       </div>
-        </div>
-    )
+    </div>
+  );
 }
