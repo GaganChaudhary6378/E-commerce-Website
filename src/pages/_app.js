@@ -19,6 +19,7 @@ const App = ({ Component, pageProps }) => {
       localStorage.clear()
     }
   }, []);
+  
   function saveCart(myCart) {
     localStorage.setItem("cart", JSON.stringify(myCart));
     let subt=0;
