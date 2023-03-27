@@ -78,7 +78,7 @@ export default function Navbar({
             return (
               <li key={k}>
                 <div className="pl-4 item flex my-5">
-                  <div className="w-2/3 font-semibold">{cart[k].name}</div>
+                  <div className="w-2/3 font-semibold">{cart[k].name}({cart[k].size}/{cart[k].variant})</div>
                   <div className="flex font-semibold items-center justify-center w-1/3">
                     <AiFillMinusCircle
                       onClick={() => {

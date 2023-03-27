@@ -30,7 +30,7 @@ const App = ({ Component, pageProps }) => {
   }
 
   function addToCart(itemCode, qty, price, name, size, variant) {
-    let newCart = cart;
+    let newCart = JSON.parse(JSON.stringify(cart));
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
     } else {
@@ -50,7 +50,7 @@ const App = ({ Component, pageProps }) => {
     }
     if (newCart[itemCode].qty <= 0) {
       delete newCart[itemCode];
-    }
+    }   
     setCart(newCart);
     saveCart(newCart);
   }
