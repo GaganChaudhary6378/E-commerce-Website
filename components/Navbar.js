@@ -58,7 +58,7 @@ export default function Navbar({
       </div>
       <div
         ref={ref}
-        className="w-80 h-[100vh] sideCart absolute top-0 right-0 bg-pink-200 px-6 py-10 z-10 hidden"
+        className="w-80 h-[100vh] sideCart overflow-y-scroll absolute top-0 right-0 bg-pink-200 px-6 py-10 z-10 hidden"
       >
         <h2 className="font-bold text-xl text-center">Shopping Cart</h2>
         <span

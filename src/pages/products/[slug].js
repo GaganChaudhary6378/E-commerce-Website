@@ -2,37 +2,80 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Product from "../../../models/Product";
 import mongoose from "mongoose";
-export default function Slug({addToCart,product,variants}) {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+export default function Slug({
+  buyNow,
+  clearCart,
+  addToCart,
+  product,
+  variants,
+}) {
   const router = useRouter();
-  const { slug } = router.query
+  const { slug } = router.query;
   // console.log(slug)
   const [pin, setPin] = React.useState();
   const [service, setService] = React.useState();
 
   async function checkServicibility() {
-    let pins = await fetch("http://localhost:3001/api/pincode");
+    let pins = await fetch("http://localhost:3000/api/pincode");
     let pinJson = await pins.json();
-    console.log(pinJson)
+    console.log(pinJson);
     if (pinJson.includes(parseInt(pin))) {
       setService(true);
+      toast.success('Yeah! We deliever to this location.', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     } else {
       setService(false);
+      toast.error('We are not servicable at this location!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   }
-  function onChangePin(e){
-    console.log(e.target.value)
+  function onChangePin(e) {
+    console.log(e.target.value);
     setPin(e.target.value);
   }
-  const refreshVariant =(newSize,newColor) => {
-    let url=`http://localhost:3000/products/${variants[newColor][newSize]['slug']}`
+
+  const refreshVariant = (newSize, newColor) => {
+    let url = `http://localhost:3000/products/${variants[newColor][newSize]["slug"]}`;
     // console.log(url)
-    window.location=url;
-  }
-  const [color,setColor]=React.useState(product.color);
-  const [size,setSize]=React.useState(product.size);
+    window.location = url;
+  };
+  const [color, setColor] = React.useState(product.color);
+  const [size, setSize] = React.useState(product.size);
   return (
     <>
       <section className="text-gray-600 body-font overflow-hidden">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        {/* Same as */}
+        <ToastContainer />
         <div className="container px-5 py-16 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
@@ -145,27 +188,95 @@ export default function Slug({addToCart,product,variants}) {
                   </a>
                 </span>
               </div>
-              <p className="leading-relaxed">
-                {product.desc}
-              </p>
+              <p className="leading-relaxed">{product.desc}</p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                 <div className="flex">
                   <span className="mr-3">Color</span>
-                  {Object.keys(variants).includes('red') && Object.keys(variants['red']).includes(size) && <button onClick={() => {refreshVariant(size,'red')}} className={`border-2 ${color==='red' ? 'border-black' : 'border-gray-300'} bg-red-700 rounded-full w-6 h-6 focus:outline-none`}></button>}
-                  {Object.keys(variants).includes('yellow') && Object.keys(variants['yellow']).includes(size) && <button onClick={() => {refreshVariant(size,'yellow')}}  className={`border-2 ${color==='yellow' ? 'border-black' : 'border-gray-300'} ml-1 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none`}></button>}
-                  {Object.keys(variants).includes('purple') && Object.keys(variants['purple']).includes(size) && <button onClick={() => {refreshVariant(size,'purple')}}  className={`border-2 ${color==='purple' ? 'border-black' : 'border-gray-300'} ml-1 bg-purple-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
-                  {Object.keys(variants).includes('Black') && Object.keys(variants['Black']).includes(size) && <button onClick={() => {refreshVariant(size,'Black')}}  className={`border-2 ${color==='Black' ? 'border-black' : 'border-gray-300'} ml-1 bg-black rounded-full w-6 h-6 focus:outline-none`}></button>}
-                  {Object.keys(variants).includes('green') && Object.keys(variants['green']).includes(size) && <button onClick={() => {refreshVariant(size,'green')}}  className={`border-2 ${color==='green' ? 'border-black' : 'border-gray-300'} ml-1 bg-green-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
+                  {Object.keys(variants).includes("red") &&
+                    Object.keys(variants["red"]).includes(size) && (
+                      <button
+                        onClick={() => {
+                          refreshVariant(size, "red");
+                        }}
+                        className={`border-2 ${
+                          color === "red" ? "border-black" : "border-gray-300"
+                        } bg-red-700 rounded-full w-6 h-6 focus:outline-none`}
+                      ></button>
+                    )}
+                  {Object.keys(variants).includes("yellow") &&
+                    Object.keys(variants["yellow"]).includes(size) && (
+                      <button
+                        onClick={() => {
+                          refreshVariant(size, "yellow");
+                        }}
+                        className={`border-2 ${
+                          color === "yellow"
+                            ? "border-black"
+                            : "border-gray-300"
+                        } ml-1 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none`}
+                      ></button>
+                    )}
+                  {Object.keys(variants).includes("purple") &&
+                    Object.keys(variants["purple"]).includes(size) && (
+                      <button
+                        onClick={() => {
+                          refreshVariant(size, "purple");
+                        }}
+                        className={`border-2 ${
+                          color === "purple"
+                            ? "border-black"
+                            : "border-gray-300"
+                        } ml-1 bg-purple-500 rounded-full w-6 h-6 focus:outline-none`}
+                      ></button>
+                    )}
+                  {Object.keys(variants).includes("Black") &&
+                    Object.keys(variants["Black"]).includes(size) && (
+                      <button
+                        onClick={() => {
+                          refreshVariant(size, "Black");
+                        }}
+                        className={`border-2 ${
+                          color === "Black" ? "border-black" : "border-gray-300"
+                        } ml-1 bg-black rounded-full w-6 h-6 focus:outline-none`}
+                      ></button>
+                    )}
+                  {Object.keys(variants).includes("green") &&
+                    Object.keys(variants["green"]).includes(size) && (
+                      <button
+                        onClick={() => {
+                          refreshVariant(size, "green");
+                        }}
+                        className={`border-2 ${
+                          color === "green" ? "border-black" : "border-gray-300"
+                        } ml-1 bg-green-500 rounded-full w-6 h-6 focus:outline-none`}
+                      ></button>
+                    )}
                 </div>
                 <div className="flex ml-6 items-center">
                   <span className="mr-3">Size</span>
                   <div className="relative">
-                    <select value={size} onChange={(e) => {refreshVariant(e.target.value,color)}} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-500 text-base pl-3 pr-10">
-                      {Object.keys(variants[color]).includes("S") && <option value={'S'}>S</option>}
-                      {Object.keys(variants[color]).includes("M")  && <option value={'M'}>M</option>}
-                      {Object.keys(variants[color]).includes("L") && <option value={'L'}>L</option>}
-                      {Object.keys(variants[color]).includes("XL") && <option value={'XL'}>XL</option>}
-                      {Object.keys(variants[color]).includes("XXL") && <option value={'XXL'}>XXL</option>}
+                    <select
+                      value={size}
+                      onChange={(e) => {
+                        refreshVariant(e.target.value, color);
+                      }}
+                      className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-500 text-base pl-3 pr-10"
+                    >
+                      {Object.keys(variants[color]).includes("S") && (
+                        <option value={"S"}>S</option>
+                      )}
+                      {Object.keys(variants[color]).includes("M") && (
+                        <option value={"M"}>M</option>
+                      )}
+                      {Object.keys(variants[color]).includes("L") && (
+                        <option value={"L"}>L</option>
+                      )}
+                      {Object.keys(variants[color]).includes("XL") && (
+                        <option value={"XL"}>XL</option>
+                      )}
+                      {Object.keys(variants[color]).includes("XXL") && (
+                        <option value={"XXL"}>XXL</option>
+                      )}
                     </select>
                     <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                       <svg
@@ -187,10 +298,20 @@ export default function Slug({addToCart,product,variants}) {
                 <span className="title-font font-medium text-2xl text-gray-900">
                   ₹580.00
                 </span>
-                <button className="flex ml-4 md:ml-8 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded">
+                <button
+                  onClick={() => {
+                    buyNow(slug, 1, 499, product.title, size, color);
+                  }}
+                  className="flex ml-4 md:ml-8 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded"
+                >
                   Buy Now
                 </button>
-                <button onClick={() => {addToCart(slug,1,499,product.title,size,color)}} className="flex ml-2 md:ml-4 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded">
+                <button
+                  onClick={() => {
+                    addToCart(slug, 1, 499, product.title, size, color);
+                  }}
+                  className="flex ml-2 md:ml-4 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded"
+                >
                   Add to Cart
                 </button>
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
@@ -220,12 +341,16 @@ export default function Slug({addToCart,product,variants}) {
                   Check
                 </button>
               </div>
-              {!service && service!=null && <div className="text-red-700 text-sm mt-3">
-                Sorry! We do not deliver to this pincode.
-              </div>}
-              {service && service!=null && <div className="text-green-700 text-sm mt-3">
-                Yay! This pinocode is serviceable.
-              </div>}
+              {!service && service != null && (
+                <div className="text-red-700 text-sm mt-3">
+                  Sorry! We do not deliver to this pincode.
+                </div>
+              )}
+              {service && service != null && (
+                <div className="text-green-700 text-sm mt-3">
+                  Yay! This pinocode is serviceable.
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -237,18 +362,21 @@ export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect(process.env.MONGO_URI);
   }
-  let product = await Product.findOne({ slug: context.query.slug});
-  let variants= await Product.find({title: product.title})
-  let colorSizeSlug={} // {red {XL : {slug :'loop-Cart}}}
-  for(let item of variants){
-    if(Object.keys(colorSizeSlug).includes(item.color)){
-      colorSizeSlug[item.color][item.size]={slug :item.slug};
-    }else{
-      colorSizeSlug[item.color]={}
-      colorSizeSlug[item.color][item.size]={slug:item.slug}
+  let product = await Product.findOne({ slug: context.query.slug });
+  let variants = await Product.find({ title: product.title });
+  let colorSizeSlug = {}; // {red {XL : {slug :'loop-Cart}}}
+  for (let item of variants) {
+    if (Object.keys(colorSizeSlug).includes(item.color)) {
+      colorSizeSlug[item.color][item.size] = { slug: item.slug };
+    } else {
+      colorSizeSlug[item.color] = {};
+      colorSizeSlug[item.color][item.size] = { slug: item.slug };
     }
   }
   return {
-    props: { product: JSON.parse(JSON.stringify(product)),variants:JSON.parse(JSON.stringify(colorSizeSlug)) }, // will be passed to the page component as props
-  }
-};
+    props: {
+      product: JSON.parse(JSON.stringify(product)),
+      variants: JSON.parse(JSON.stringify(colorSizeSlug)),
+    }, // will be passed to the page component as props
+  };
+}
