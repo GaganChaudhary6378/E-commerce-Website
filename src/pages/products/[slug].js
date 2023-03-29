@@ -81,7 +81,7 @@ export default function Slug({
             <img
               alt="ecommerce"
               className="lg:w-1/2 w-full lg:h-auto px-24 object-cover object-top rounded"
-              src="https://m.media-amazon.com/images/I/61bzvKukDhL._UL1500_.jpg"
+              src={product.img}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
@@ -296,11 +296,11 @@ export default function Slug({
               </div>
               <div className="flex">
                 <span className="title-font font-medium text-2xl text-gray-900">
-                  ₹580.00
+                ₹{product.price}
                 </span>
                 <button
                   onClick={() => {
-                    buyNow(slug, 1, 499, product.title, size, color);
+                    buyNow(slug, 1, product.price, product.title, size, color);
                   }}
                   className="flex ml-4 md:ml-8 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded"
                 >
@@ -308,7 +308,7 @@ export default function Slug({
                 </button>
                 <button
                   onClick={() => {
-                    addToCart(slug, 1, 499, product.title, size, color);
+                    addToCart(slug, 1, product.price, product.title, size, color);
                   }}
                   className="flex ml-2 md:ml-4 text-white bg-pink-500 border-0 py-2 px-2 md:px-8 focus:outline-none hover:bg-pink-600 rounded"
                 >
@@ -363,7 +363,7 @@ export async function getServerSideProps(context) {
     await mongoose.connect(process.env.MONGO_URI);
   }
   let product = await Product.findOne({ slug: context.query.slug });
-  let variants = await Product.find({ title: product.title });
+  let variants = await Product.find({ title: product.title,category:product.category});
   let colorSizeSlug = {}; // {red {XL : {slug :'loop-Cart}}}
   for (let item of variants) {
     if (Object.keys(colorSizeSlug).includes(item.color)) {
