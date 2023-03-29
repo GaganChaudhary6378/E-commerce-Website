@@ -1,8 +1,75 @@
 import React from "react";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function login() {
+  const router=useRouter();
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
+
+  const handleChange = (e) => {
+    if (e.target.name == "email") {
+      setEmail(e.target.value);
+    } else if (e.target.name == "password") {
+      setPassword(e.target.value);
+    }
+  };
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const data = { email, password };
+    let res = await fetch("http://localhost:3000/api/login", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let response = await res.json();
+    setEmail("");
+    setPassword("");
+    if (response.success) {
+      toast.success("You are logged in", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+      router.push('http://localhost:3000')
+      },1500);
+    }else{
+      toast.error(response.error, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }
   return (
     <div>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
@@ -17,22 +84,28 @@ export default function login() {
             <p className="mt-2 text-center text-sm text-gray-600">
               Or
               <Link
-                href={'/signup'}
+                href={"/signup"}
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 &nbsp;Signup
               </Link>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-8 space-y-6"
+            method="POST"
+          >
             <input type="hidden" name="remember" value="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
-                <label for="email-address" className="sr-only">
+                <label for="email" className="sr-only">
                   Email address
                 </label>
                 <input
-                  id="email-address"
+                  value={email}
+                  onChange={handleChange}
+                  id="email"
                   name="email"
                   type="email"
                   autocomplete="email"
@@ -46,6 +119,8 @@ export default function login() {
                   Password
                 </label>
                 <input
+                  value={password}
+                  onChange={handleChange}
                   id="password"
                   name="password"
                   type="password"
