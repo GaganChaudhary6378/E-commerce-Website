@@ -65,7 +65,7 @@ export async function getServerSideProps(context) {
   }
   let products = await Product.find({ category: "Tshirts" });
   let tshirts = {};
-  for (let item of products) {
+  for (let item of products) {     
     if (item.title in tshirts) {
       if (
         !tshirts[item.title].color.includes(item.color) &&
