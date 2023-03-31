@@ -7,8 +7,8 @@ const handler = async (req, res) => {
     let user = await User.findOne({ email: req.body.email });
     
     const bytes=CryptoJS.AES.decrypt(user.password,'secret123')
-    console.log(bytes.toString(CryptoJS.enc.Utf8))
-    decryptedPass=JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+    const decryptedPass=bytes.toString(CryptoJS.enc.Utf8)
+    // console.log(decryptedPass)
     if (user) {
       if (req.body.email == user.email && req.body.password == decryptedPass) {
         res
