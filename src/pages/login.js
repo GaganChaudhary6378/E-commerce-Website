@@ -30,6 +30,7 @@ export default function login() {
     setEmail("");
     setPassword("");
     if (response.success) {
+      localStorage.setItem('token',response.token)
       toast.success("You are logged in", {
         position: "top-center",
         autoClose: 5000,
