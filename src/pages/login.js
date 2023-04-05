@@ -9,6 +9,11 @@ export default function login() {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
 
+  React.useEffect(() => {
+    if(localStorage.getItem('token')){
+      router.push('/')
+    }
+  },[])
   const handleChange = (e) => {
     if (e.target.name == "email") {
       setEmail(e.target.value);
@@ -134,20 +139,6 @@ export default function login() {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                />
-                <label
-                  for="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Remember me
-                </label>
-              </div>
 
               <div className="text-sm">
                 <Link
