@@ -6,8 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function login() {
   const router=useRouter();
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   React.useEffect(() => {
     if(localStorage.getItem('token')){

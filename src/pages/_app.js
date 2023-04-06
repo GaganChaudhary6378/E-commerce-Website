@@ -12,7 +12,7 @@ const App = ({ Component, pageProps }) => {
   const [cart, setCart] = React.useState({});
   const [subTotal, setSubTotal] = React.useState(0);
   const [user,setUser]=React.useState({value:null})
-  const [key,setKey]=React.useState(0)
+  const [key,setKey]=React.useState()
   const router=useRouter();
   const [progress, setProgress] = React.useState(0)
 
