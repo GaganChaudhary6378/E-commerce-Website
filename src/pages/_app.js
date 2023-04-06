@@ -47,6 +47,7 @@ const App = ({ Component, pageProps }) => {
     localStorage.removeItem('token')
     setUser({value: null})
     setKey(Math.random)
+    router.push('/')
   }
   function saveCart(myCart) {
     localStorage.setItem("cart", JSON.stringify(myCart));

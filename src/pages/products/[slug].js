@@ -18,7 +18,7 @@ export default function Slug({
   const [service, setService] = React.useState();
 
   async function checkServicibility() {
-    let pins = await fetch("http://localhost:3000/api/pincode");
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
     let pinJson = await pins.json();
     console.log(pinJson);
     if (pinJson.includes(parseInt(pin))) {
@@ -53,7 +53,7 @@ export default function Slug({
   }
 
   const refreshVariant = (newSize, newColor) => {
-    let url = `http://localhost:3000/products/${variants[newColor][newSize]["slug"]}`;
+    let url = `${process.env.NEXT_PUBLIC_HOST}/products/${variants[newColor][newSize]["slug"]}`;
     // console.log(url)
     window.location = url;
   };
