@@ -27,7 +27,6 @@ export default function login() {
     e.preventDefault();
     const data = { email, password };
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
-      mode: 'no-cors',
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
