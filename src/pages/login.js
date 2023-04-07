@@ -35,8 +35,7 @@ export default function login() {
       body: JSON.stringify(data),
     });
 
-    let r = await res.json();
-    let response=r;
+    let response = await res.json();
   
     setEmail("");
     setPassword("");
