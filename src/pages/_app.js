@@ -6,8 +6,6 @@ import dynamic from "next/dynamic";
 import React from "react";
 import LoadingBar from 'react-top-loading-bar'
 
-
-
 const App = ({ Component, pageProps }) => {
   const [cart, setCart] = React.useState({});
   const [subTotal, setSubTotal] = React.useState(0);

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+
 export default function login() {
   const router=useRouter();
   const [email, setEmail] = React.useState('');
@@ -25,13 +27,15 @@ export default function login() {
     e.preventDefault();
     const data = { email, password };
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
-      mode: 'no-cors',
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
+        'Accept': 'application/json'
       },
+      
       body: JSON.stringify(data),
     });
+
     let response = await res.json();
     setEmail("");
     setPassword("");
