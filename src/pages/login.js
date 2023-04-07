@@ -30,7 +30,6 @@ export default function login() {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
-        'Accept': 'application/json'
       },
       
       body: JSON.stringify(data),
