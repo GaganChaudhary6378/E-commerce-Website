@@ -44,9 +44,9 @@ export default function checkout({
       },
       "handler": {
         "notifyMerchant": function (eventName, data) {
-          console.log("notifyMerchant handler function called");
-          console.log("eventName => ", eventName);
-          console.log("data => ", data);
+          // console.log("notifyMerchant handler function called");
+          // console.log("eventName => ", eventName);
+          // console.log("data => ", data);
         },
       },
     };
@@ -57,7 +57,7 @@ export default function checkout({
         window.Paytm.CheckoutJS.invoke();
       })
       .catch(function onError(error) {
-        console.log("error => ", error);
+        // console.log("error => ", error);
       })
   }
   return (
