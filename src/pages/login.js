@@ -41,9 +41,9 @@ export default function login() {
     setPassword("");
     if (response.success) {
       localStorage.setItem('token',response.token)
-      toast.success("You are logged in", {
+      toast.success("You are successfully logged in", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -57,7 +57,7 @@ export default function login() {
     }else{
       toast.error(response.error, {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
