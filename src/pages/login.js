@@ -98,7 +98,7 @@ export default function login() {
                 href={"/signup"}
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                &nbsp;Signup
+                &nbsp;SignUp
               </Link>
             </p>
           </div>
