@@ -27,7 +27,7 @@ export default function login() {
     e.preventDefault();
     const data = { email, password };
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
-      method: "POST", // or 'PUT'
+      method: "POST", 
       headers: {
         "Content-Type": "application/json",
       },
