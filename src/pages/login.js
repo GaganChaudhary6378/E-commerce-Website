@@ -111,7 +111,7 @@ export default function login() {
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label for="email" className="sr-only">
-                  Email address
+                  Email Address
                 </label>
                 <input
                   value={email}
