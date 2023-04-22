@@ -174,7 +174,7 @@ export default function login() {
                     />
                   </svg>
                 </span>
-                Sign in
+                Sign In
               </button>
             </div>
           </form>
