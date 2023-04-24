@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import Link from "next/link"; 
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 import Head from "next/head";
@@ -50,7 +50,7 @@ export default function checkout({
         },
       },
     };
-
+    console.log(window.user)
     window.Paytm.CheckoutJS.init(config)
       .then(function onSuccess() {
         // after successfully updating configuration, invoke JS Checkout
