@@ -68,11 +68,13 @@ export default function checkout({
           content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
         />
       </Head>
-      <Script
+      {/* <Script
         type="application/javascript"
         src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`}
         crossorigin="anonymous"
-      />
+      /> this is going to be removed further */}
+      
+      <Script src="https://checkout.razorpay.com/v1/checkout.js"/>
 
       <h1 className="font-bold text-3xl my-8 text-center">Checkout</h1>
       <h2 className="font-bold text-xl mx-11">1. Delivery Details</h2>

@@ -15,6 +15,7 @@
     "mongoose": "^7.0.2",
     "next": "13.2.3",
     "paytmchecksum": "^1.5.0",
+    "razorpay": "^2.8.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",

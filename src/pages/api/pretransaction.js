@@ -6,7 +6,8 @@ const https = require("https");
  * You can get this utility from https://developer.paytm.com/docs/checksum/
  */
 
-const PaytmChecksum = require('paytmchecksum');
+// const PaytmChecksum = require('paytmchecksum'); this is to be removed further
+const Razorpay = require('razorpay');
 
 export default async function handler(req, res) {
   res.status(200).json({ name: "John Doe" });
