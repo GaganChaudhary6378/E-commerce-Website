@@ -1,25 +1,25 @@
 import React from "react";
-import Link from "next/link"; 
+import Link from "next/link";
+import { Razorpay } from "razorpay-checkout";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 import Head from "next/head";
 import { BsFillBagCheckFill } from "react-icons/bs";
 import Script from "next/script";
 
+const shortid = require("shortid");
 export default function checkout({
   cart,
   subTotal,
   removeFromCart,
   addToCart,
 }) {
-
-  async function initiatePayment()  {
+  async function initiatePayment() {
     // Here we are getting the transaction token
-  let oid = Math.floor(Math.random() * Date.now());
-
+    let oid = Math.floor(Math.random() * Date.now());
 
     const data = { cart, subTotal, oid, email: "email" };
-
+    // let txnToken = txnRes.txnToken;
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
       method: "POST", // or 'PUT'
       headers: {
@@ -27,38 +27,76 @@ export default function checkout({
       },
       body: JSON.stringify(data),
     });
+    let txnToken = await a.json();
 
-    let txnRes = await a.json();
-    // console.log(txnToken);
-    let txnToken=txnRes.txnToken;
-    // const data = { username: "example" };
-    // postJSON(data);
-    var config = {
-      "root": "",
-      "flow": "DEFAULT",
-      "data": {
-        "orderId": oid /* update order id */,
-        "token": txnToken /* update token value */,
-        "tokenType": "TXN_TOKEN",
-        "amount": subTotal /* update amount */,
+    var options = {
+      "key": "process.env.PAYTM_MKEY", // Enter the Key ID generated from the Dashboard
+      "amount": subTotal, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "txn":txnToken,
+      "name": "Loop Cart", //your business name
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": oid, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+      "prefill": {
+          "name": "Gagan chaudhary", //your customer's name
+          "email": email,
+          "contact": "6378446949"
       },
-      "handler": {
-        "notifyMerchant": function (eventName, data) {
-          // console.log("notifyMerchant handler function called");
-          // console.log("eventName => ", eventName);
-          // console.log("data => ", data);
-        },
+      "notes": {
+          "address": "Razorpay Corporate Office"
       },
-    };
-    console.log(window.user)
-    window.Paytm.CheckoutJS.init(config)
-      .then(function onSuccess() {
-        // after successfully updating configuration, invoke JS Checkout
-        window.Paytm.CheckoutJS.invoke();
-      })
-      .catch(function onError(error) {
-        // console.log("error => ", error);
-      })
+      "theme": {
+          "color": "#3399cc"
+      }
+  };
+  var rzp1 = new Razorpay(options);
+  document.getElementById('rzp-button1').onclick = function(e){
+      rzp1.open();
+      e.preventDefault();
+  }
+
+    
+
+  //   // till here it is correct
+
+  //   let txnRes = await a.json();
+  //   // console.log(txnToken);
+  //   let txnToken = txnRes.txnToken;
+  //   // const data = { username: "example" };
+  //   // postJSON(data);
+  //   var config = {
+  //     root: "",
+  //     flow: "DEFAULT",
+  //     amount: subTotal,
+  //     description: "wallet transaction",
+  //     orderId: oid,
+  //     data: {
+  //       orderId: oid /* update order id */,
+  //       token: txnToken /* update token value */,
+  //       tokenType: "TXN_TOKEN",
+  //       amount: subTotal /* update amount */,
+  //     },
+  //     handler: {
+  //       notifyMerchant: function (eventName, data) {
+  //         // console.log("notifyMerchant handler function called");
+  //         // console.log("eventName => ", eventName);
+  //         // console.log("data => ", data);
+  //       },
+  //     },
+  //   };
+  //   // console.log(window.user)
+
+  //   // window.Paytm.CheckoutJS.init(config)
+  //   window.Razorpay.init(config)
+  //     .then(function onSuccess() {
+  //       // after successfully updating configuration, invoke JS Checkout
+  //       window.Razorpay.invoke();
+  //     })
+  //     .catch(function onError(error) {
+  //       // console.log("error => ", error);
+  //     });
   }
   return (
     <div className="container m-auto">
@@ -73,8 +111,8 @@ export default function checkout({
         src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`}
         crossorigin="anonymous"
       /> this is going to be removed further */}
-      
-      <Script src="https://checkout.razorpay.com/v1/checkout.js"/>
+
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       <h1 className="font-bold text-3xl my-8 text-center">Checkout</h1>
       <h2 className="font-bold text-xl mx-11">1. Delivery Details</h2>
