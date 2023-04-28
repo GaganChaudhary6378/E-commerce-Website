@@ -5,28 +5,31 @@ const stripe = Stripe(process.env.PAYTM_MKEY);
 import axios from "axios"
 
 export default async function handler(req, res) {
-console.log(req.body)
-
   if (req.method !== "POST") return
 
-
+  // console.log({req: req.body.cart, item: Object.keys(req)})
   const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        // price: req.body.subtotal,
-        // currency: "INR",
-        price_data: {currency: 'INR', product_data: {name: 'T-shirt'}, unit_amount: 2000},
-        // orderId: req.body.oid,
-        // receipt: "receipt#1",
-        // callbackUrl: `${process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
-        // userInfo: {
-        //   custId: req.body.email,
-        //   key2: "value2",
-        // },
-        quantity: 1
-      },
+ 
+    line_items: Object.keys(req.body.cart).map((key) => ({
+      price_data: {currency: 'INR', product_data: {name: req.body.cart[key].name}, unit_amount: req.body.cart[key].price * 100},
+      quantity: req.body.cart[key].qty
+    })),
+    // [
+    //   {
+    //     // price: req.body.subtotal,
+    //     // currency: "INR",
+    //     price_data: {currency: 'INR', product_data: {name: 'T-shirt'}, unit_amount: 2000},
+    //     // orderId: req.body.oid,
+    //     // receipt: "receipt#1",
+    //     // callbackUrl: `${process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
+    //     // userInfo: {
+    //     //   custId: req.body.email,
+    //     //   key2: "value2",
+    //     // },
+    //     quantity: 1
+    //   },
       
-    ],
+    // ],
     mode: "payment",
     success_url:`${process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
     cancel_url: "http://localhost:4242/cancel",
@@ -34,7 +37,7 @@ console.log(req.body)
 
   // console.log({session: session.url})
 
-  // res.json({url: session.url})
+  res.json({url: session.url})
 
 
 
