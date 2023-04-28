@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
   // console.log({req: req.body.cart, item: Object.keys(req)})
   const session = await stripe.checkout.sessions.create({
- 
+    payment_method_types: ['card'],
     line_items: Object.keys(req.body.cart).map((key) => ({
       price_data: {currency: 'INR', product_data: {name: req.body.cart[key].name}, unit_amount: req.body.cart[key].price * 100},
       quantity: req.body.cart[key].qty

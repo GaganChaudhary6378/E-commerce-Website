@@ -236,7 +236,7 @@ export default function checkout({
                       }}
                       className="cursor-pointer text-pink-500"
                     />
-                    <span className="mx-2 text-sm">{cart[k].qty}</span>
+                    <span className="mx-2  text-sm">{cart[k].qty}</span>
                     <AiFillPlusCircle
                       onClick={() =>
                         addToCart(
