@@ -6,7 +6,7 @@ import { AiFillMinusCircle } from "react-icons/ai";
 import Head from "next/head";
 import { BsFillBagCheckFill } from "react-icons/bs";
 import Script from "next/script";
-import { Razorpay } from "razorpay-checkout";
+import {router} from 'next/router'
 
 const shortid = require("shortid");
 export default function checkout({
@@ -15,99 +15,84 @@ export default function checkout({
   removeFromCart,
   addToCart,
 }) {
-
-  const handleOpenRazorpay =(data) => {
-    const options = {
-      key: "process.env.PAYTM_MKEY", // Enter the Key ID generated from the Dashboard
-      amount: Number(data.subTotal), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-      currency: "INR",
-      txn: data.txnToken,
-      name: "Loop Cart", //your business name
-      description: "Test Transaction",
-      image: "https://example.com/your_logo",
-      order_id: data.oid, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
-      prefill: {
-        name: "Gagan chaudhary", //your customer's name
-        email: data.email,
-        contact: "6378446949",
-      },
-      handler:function(response){
-        console.log(response,"34")
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-
-  }
-  const initiatePayment = async () => {
-    
+  
+  const initiatePayment = () => {
     // Here we are getting the transaction token
     let oid = Math.floor(Math.random() * Date.now());
 
     const data = { cart, subTotal, oid, email: "email" };
     // let txnToken = txnRes.txnToken;
-    axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`,data ,{
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then(res => {
-      console.log(res.data,"29")
-      handleOpenRazorpay(res.data)
-    }).catch(function(error){
-      console.log(error);
-    })
-    // let txnToken = await a.json();
+    axios
+      .post(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, data, {
+        root: "",
+        flow: "DEFAULT",
+        amount: subTotal,
+        description: "wallet transaction",
+        orderId: oid,
+        data: {
+          orderId: oid /* update order id */ /* update token value */,
+          tokenType: "TXN_TOKEN",
+          amount: subTotal /* update amount */,
+        },
+      })
+      .then((res) => {
+        console.log({res})
 
-    
-    // if (typeof window !== "undefined") {
-    //   // Client-side-only code
-    //   const paymentObject = new window.Razorpay(options);
-    //   paymentObject.open();
-    // }
-
-    //   // till here it is correct
-
-    //   let txnRes = await a.json();
-    //   // console.log(txnToken);
-    //   let txnToken = txnRes.txnToken;
-    //   // const data = { username: "example" };
-    //   // postJSON(data);
-    //   var config = {
-    //     root: "",
-    //     flow: "DEFAULT",
-    //     amount: subTotal,
-    //     description: "wallet transaction",
-    //     orderId: oid,
-    //     data: {
-    //       orderId: oid /* update order id */,
-    //       token: txnToken /* update token value */,
-    //       tokenType: "TXN_TOKEN",
-    //       amount: subTotal /* update amount */,
-    //     },
-    //     handler: {
-    //       notifyMerchant: function (eventName, data) {
-    //         // console.log("notifyMerchant handler function called");
-    //         // console.log("eventName => ", eventName);
-    //         // console.log("data => ", data);
-    //       },
-    //     },
-    //   };
-    //   // console.log(window.user)
-
-    //   // window.Paytm.CheckoutJS.init(config)
-    //   window.Razorpay.init(config)
-    //     .then(function onSuccess() {
-    //       // after successfully updating configuration, invoke JS Checkout
-    //       window.Razorpay.invoke();
-    //     })
-    //     .catch(function onError(error) {
-    //       // console.log("error => ", error);
-    //     });
+        router.push(res.data.url)
+        // if (res.data.url) {
+        //   // window.location.href = res.data.url;
+        //   router.push(res.data.url);
+        // }
+      })
+      .catch((error) => console.log(error.message));
   };
+  // let txnToken = await a.json();
+
+  // if (typeof window !== "undefined") {
+  //   // Client-side-only code
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
+  // }
+
+  //   // till here it is correct
+
+  //   let txnRes = await a.json();
+  //   // console.log(txnToken);
+  //   let txnToken = txnRes.txnToken;
+  //   // const data = { username: "example" };
+  //   // postJSON(data);
+  //   var config = {
+  //     root: "",
+  //     flow: "DEFAULT",
+  //     amount: subTotal,
+  //     description: "wallet transaction",
+  //     orderId: oid,
+  //     data: {
+  //       orderId: oid /* update order id */,
+  //       token: txnToken /* update token value */,
+  //       tokenType: "TXN_TOKEN",
+  //       amount: subTotal /* update amount */,
+  //     },
+  //     handler: {
+  //       notifyMerchant: function (eventName, data) {
+  //         // console.log("notifyMerchant handler function called");
+  //         // console.log("eventName => ", eventName);
+  //         // console.log("data => ", data);
+  //       },
+  //     },
+  //   };
+  //   // console.log(window.user)
+
+  //   // window.Paytm.CheckoutJS.init(config)
+  //   window.Razorpay.init(config)
+  //     .then(function onSuccess() {
+  //       // after successfully updating configuration, invoke JS Checkout
+  //       window.Razorpay.invoke();
+  //     })
+  //     .catch(function onError(error) {
+  //       // console.log("error => ", error);
+  //     });
+
   return (
     <div className="container m-auto">
       <Head>
@@ -120,7 +105,7 @@ export default function checkout({
         type="application/javascript"
         src={`https://checkout.razorpay.com/v1/checkout.js`}
         crossorigin="anonymous"
-      />       
+      />
       <h1 className="font-bold text-3xl my-8 text-center">Checkout</h1>
       <h2 className="font-bold text-xl mx-11">1. Delivery Details</h2>
       <div className="mx-auto flex my-4 mr-10 ml-10">
