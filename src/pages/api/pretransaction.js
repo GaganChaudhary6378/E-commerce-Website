@@ -35,13 +35,13 @@ export default async function handler(req, res) {
     cancel_url: "http://localhost:4242/cancel",
   });
 
-  // console.log({session: session.url})
-
-  res.json({url: session.url})
-
-
-
   
+  // console.log({session: session.url})
+  res.json({url: session.url})
+  res.status(200).json(line_items);
+
+
+
 //  axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/create-checkout-session`, async (req, res) => {
 //   console.log({req})
 //   const session = await stripe.checkout.sessions.create({
