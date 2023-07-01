@@ -56,20 +56,36 @@ export default function Navbar({
         </ul>
       </div>
       <div className="cart items-center absolute right-0 top-2 mx-5 md:mt-2 font-bold hover:cursor-pointer flex ">
-        <a onMouseOver={() => {setDropdown(true)}} onMouseLeave={() => {setDropdown(false)}}>
+        <a
+          onMouseOver={() => {
+            setDropdown(true);
+          }}
+          onMouseLeave={() => {
+            setDropdown(false);
+          }}
+        >
           {dropDown && (
             <div className="absolute bg-white shadow-lg border top-6 py-4 right-8 rounded-md px-5 w-32">
               <ul>
-                <Link href={'/myaccount'}><li className="py-1 text-sm hover:text-pink-700">My Account</li></Link>
-                <Link href={'/orders'}><li className="py-1 text-sm hover:text-pink-700">Orders</li></Link>
-                <li onClick={logout} className="py-1 text-sm hover:text-pink-700">Logout</li>
+                <Link href={"/myaccount"}>
+                  <li className="py-1 text-sm hover:text-pink-700">
+                    My Account
+                  </li>
+                </Link>
+                <Link href={"/orders"}>
+                  <li className="py-1 text-sm hover:text-pink-700">Orders</li>
+                </Link>
+                <li
+                  onClick={logout}
+                  className="py-1 text-sm hover:text-pink-700"
+                >
+                  Logout
+                </li>
               </ul>
             </div>
           )}
           {user.value && (
-            <MdAccountCircle
-              className="text-xl md:text-2xl mx-2"
-            />
+            <MdAccountCircle className="text-xl md:text-2xl mx-2" />
           )}
         </a>
 
